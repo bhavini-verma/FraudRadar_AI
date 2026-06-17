@@ -226,8 +226,8 @@ def get_audio_files(data_dir):
     # Track counts per subfolder category to enforce limits
     counts = {}
     
-    # Search for wav and flac files
-    for ext in ['*.wav', '*.flac']:
+    # Search for wav, flac, and mp3 files
+    for ext in ['*.wav', '*.flac', '*.mp3']:
         for file in glob.glob(os.path.join(data_dir, '**', ext), recursive=True):
             if 'DEMONSTRATION' in file:
                 continue
