@@ -1,7 +1,7 @@
 """
-VoiceGuard — Fusion Engine
+fraudradar_ai — Fusion Engine
 ─────────────────────────────────────────────────────────────────────────
-Implements Section 10 of the VoiceGuard project plan:
+Implements Section 10 of the fraudradar_ai project plan:
 
     deep_score  = XGBoost_A.predict(wav2vec2_embedding)   # 768-dim in
     bio_score   = XGBoost_B.predict(biological_features)  # 101-dim in (see extract_bio.py for exact count)
@@ -12,7 +12,7 @@ Plus the sliding-window alert rule from Section 9:
     trigger an alert (reduces false alarms from single-chunk noise).
 
 ─────────────────────────────────────────────────────────────────────────
-MODEL STATUS: voiceguard_a.json and voiceguard_b.json have not been
+MODEL STATUS: fraudradar_ai.json and fraudradar_ai.json have not been
 trained yet (confirmed by the user — same situation as the originally
 referenced fusion_model.pkl, which was an empty placeholder file).
 
@@ -24,7 +24,7 @@ every API response marks placeholder results so the dashboard / frontend
 can show this honestly rather than presenting fabricated confidence as
 real model output.
 
-THE MOMENT real voiceguard_a.json / voiceguard_b.json files are placed in
+THE MOMENT real fraudradar_ai.json / fraudradar_ai.json files are placed in
 backend/models/, FusionEngine automatically loads and uses them — no other
 code changes required.
 """
@@ -51,8 +51,8 @@ SLIDING_WINDOW_SIZE = 3
 SLIDING_WINDOW_REQUIRED = 2  # 2 of last 3 chunks must exceed threshold to alert
 
 MODELS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "models")
-MODEL_A_PATH = os.path.join(MODELS_DIR, "voiceguard_a.json")
-MODEL_B_PATH = os.path.join(MODELS_DIR, "voiceguard_b.json")
+MODEL_A_PATH = os.path.join(MODELS_DIR, "fraudradar_ai.json")
+MODEL_B_PATH = os.path.join(MODELS_DIR, "fraudradar_ai.json")
 
 
 def verdict_from_score(score: float) -> str:
@@ -92,8 +92,8 @@ class FusionEngine:
         if not (a_exists and b_exists):
             self.load_status = (
                 f"placeholder_mode (missing or empty: "
-                f"{'voiceguard_a.json ' if not a_exists else ''}"
-                f"{'voiceguard_b.json' if not b_exists else ''})".strip()
+                f"{'fraudradar_ai.json ' if not a_exists else ''}"
+                f"{'fraudradar_ai.json' if not b_exists else ''})".strip()
             )
             self.using_real_models = False
             return

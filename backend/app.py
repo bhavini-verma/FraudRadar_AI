@@ -1,5 +1,5 @@
 """
-VoiceGuard — Professional Streamlit Dashboard
+fraudradar_ai — Professional Streamlit Dashboard
 ui/app.py
 
 Run: streamlit run ui/app.py
@@ -22,7 +22,7 @@ import struct
 
 # ── PAGE CONFIG ─────────────────────────────────────
 st.set_page_config(
-    page_title="VoiceGuard AI",
+    page_title="fraudradar_ai AI",
     page_icon="🛡",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -875,7 +875,7 @@ with st.sidebar:
     st.markdown("""
     <div class="vg-logo">
         <div class="vg-logo-icon">🛡</div>
-        <span class="vg-logo-text">VoiceGuard<span class="vg-logo-badge">AI</span></span>
+        <span class="vg-logo-text">fraudradar_ai<span class="vg-logo-badge">AI</span></span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1005,7 +1005,7 @@ with tab_upload:
             <div class="upload-hint">
                 <div class="upload-hint-icon">🎙</div>
                 <div class="upload-hint-title">Drop an audio file to analyze</div>
-                <div class="upload-hint-sub">VoiceGuard extracts 128 acoustic features and runs inference<br>to determine if the voice is human or AI-generated.</div>
+                <div class="upload-hint-sub">fraudradar_ai extracts 128 acoustic features and runs inference<br>to determine if the voice is human or AI-generated.</div>
                 <div class="upload-hint-pill">WAV · MP3 · FLAC</div>
             </div>
             """, unsafe_allow_html=True)
@@ -1129,7 +1129,7 @@ Audio Input (File Upload or Live Mic)<br>
     <div class="about-block">
         <div class="about-block-title">Privacy by Design — DPDP 2023</div>
         <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
-            VoiceGuard processes all audio <strong style="color:var(--text-primary);">in-memory only</strong>.
+            fraudradar_ai processes all audio <strong style="color:var(--text-primary);">in-memory only</strong>.
             No raw voice data is written to disk or transmitted externally.
             Only the risk score and timestamp are logged — never the audio itself.
             Fully compliant with India's Digital Personal Data Protection Act 2023

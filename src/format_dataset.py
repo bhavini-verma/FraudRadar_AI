@@ -30,7 +30,7 @@ def main():
     target_real_dir = os.path.join(base_dir, 'data', 'real')
     target_fake_dir = os.path.join(base_dir, 'data', 'fake')
     
-    print("=== VoiceGuard Dataset Formatter ===")
+    print("=== fraudradar_ai Dataset Formatter ===")
     
     # Create the raw folders if they don't exist yet so the user knows where to put files
     os.makedirs(raw_real_dir, exist_ok=True)

@@ -1,8 +1,8 @@
-# VoiceGuard â€” Audio Forensics Walkthrough
+# FraudRadar_AI â€” Audio Forensics Walkthrough
 *Step 1: Biological & Environmental Feature Extraction Engine*
 
 ## 1. Executive Summary & Purpose
-VoiceGuard is an advanced real-time audio forensics system designed to detect AI-generated voice clones (e.g., ElevenLabs, Play.ht, RVC) and playback spoofing.
+FraudRadar_AI is an advanced real-time audio forensics system designed to detect AI-generated voice clones (e.g., ElevenLabs, Play.ht, RVC) and playback spoofing.
 Phase 1 focuses on building the **Biological & Environmental Feature Engine**. While deep learning models (Phase 2) analyze complex phonetic patterns, the biological engine extracts fundamental physical indicators of human speech mechanicsâ€”such as vocal cord jitter, shimmer, harmonic purity, and room acoustics.
 
 ---
@@ -46,15 +46,15 @@ graph TD
 
 | Component | Path | Status | Purpose & Description |
 | :--- | :--- | :--- | :--- |
-| **Data Layer** | [`features/bio_features.csv`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/features/bio_features.csv) | **Created** | Tabular representation of statistical biological features. Contains 345 columns (2 metadata + 343 acoustic/environmental features). |
-| **Extractor** | [`src/extract_bio.py`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/src/extract_bio.py) | **Created** | Ingests WAV files, runs quality checks, simulates phone codec degradation, extracts pitch/jitter/shimmer/HNR/MFCCs/deltas/reverb, and outputs the final CSV. |
-| **Testing Utility** | [`src/generate_dummy_audio.py`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/src/generate_dummy_audio.py) | **Created** | Generates mock signals (sine tones, white noise, short clips, silence) to stress-test extraction boundaries. |
-| **Configuration** | [`requirements.txt`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/requirements.txt) | **Created** | Holds Python dependencies for scientific computation (`librosa`, `soundfile`, `pandas`, `xgboost`). |
+| **Data Layer** | [`features/bio_features.csv`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/features/bio_features.csv) | **Created** | Tabular representation of statistical biological features. Contains 345 columns (2 metadata + 343 acoustic/environmental features). |
+| **Extractor** | [`src/extract_bio.py`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/src/extract_bio.py) | **Created** | Ingests WAV files, runs quality checks, simulates phone codec degradation, extracts pitch/jitter/shimmer/HNR/MFCCs/deltas/reverb, and outputs the final CSV. |
+| **Testing Utility** | [`src/generate_dummy_audio.py`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/src/generate_dummy_audio.py) | **Created** | Generates mock signals (sine tones, white noise, short clips, silence) to stress-test extraction boundaries. |
+| **Configuration** | [`requirements.txt`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/requirements.txt) | **Created** | Holds Python dependencies for scientific computation (`librosa`, `soundfile`, `pandas`, `xgboost`). |
 
 ---
 
 ## 4. Signal Processing & Feature Engineering Formulas
-Here is the exact scientific and mathematical explanation for the features computed in [`src/extract_bio.py`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/src/extract_bio.py), highlighting the **8 shortcoming fixes** applied:
+Here is the exact scientific and mathematical explanation for the features computed in [`src/extract_bio.py`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/src/extract_bio.py), highlighting the **8 shortcoming fixes** applied:
 
 1. **Telephony Codec Simulation**: Downsamples input audio from 16kHz to 8kHz (standard GSM/AMR telephone bandwidth) and resamples it back to 16kHz before feature extraction.
    * *Forensic Significance*: Real bank calls are degraded. If we extract features on clean 16kHz audio, our model will fail on degraded phone audio due to "covariate shift" (jitter/shimmer smear under compression). This simulator matches training and deployment data.
@@ -134,7 +134,7 @@ To reproduce these results, perform the following steps in your terminal:
    python src/extract_bio.py
    ```
 4. **Inspect the Output File**:
-   View the generated features table at [`features/bio_features.csv`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/features/bio_features.csv).
+   View the generated features table at [`features/bio_features.csv`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/features/bio_features.csv).
 
 ---
 
@@ -146,9 +146,9 @@ Phase 2 focuses on discovering, downloading, and sorting massive human and synth
 
 | Dataset | Type | Original Size | Extracted Files | Target Directory | Description |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **LJSpeech 1.1** | **Bona Fide (Real)** | ~2.6 GB | 13,100 `.wav` files | [`data/raw_real/ljspeech/`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/data/raw_real/ljspeech) | Clean human speech from a single female speaker reading public domain books. |
-| **WaveFake** | **Spoof (Fake)** | ~27 GB | 117,985 `.wav` files | [`data/raw_fake/wavefake/`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/data/raw_fake/wavefake) | English synthetic subsets generated via state-of-the-art vocoders (MelGAN, Parallel WaveGAN, Multi-Band MelGAN, WaveGlow, etc.). |
-| **ASVspoof 2021 DF** | **Mixed (Real/Fake)** | ~32 GB | 611,829 `.flac` files | [`data/raw_real/asvspoof_2021_df/`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/data/raw_real/asvspoof_2021_df) <br> [`data/raw_fake/asvspoof_2021_df/`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/voiceguard/data/raw_fake/asvspoof_2021_df) | Evaluation subset for the ASVspoof 2021 Deepfake track, representing real-world compression, codec, and transmission distortions. |
+| **LJSpeech 1.1** | **Bona Fide (Real)** | ~2.6 GB | 13,100 `.wav` files | [`data/raw_real/ljspeech/`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/data/raw_real/ljspeech) | Clean human speech from a single female speaker reading public domain books. |
+| **WaveFake** | **Spoof (Fake)** | ~27 GB | 117,985 `.wav` files | [`data/raw_fake/wavefake/`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/data/raw_fake/wavefake) | English synthetic subsets generated via state-of-the-art vocoders (MelGAN, Parallel WaveGAN, Multi-Band MelGAN, WaveGlow, etc.). |
+| **ASVspoof 2021 DF** | **Mixed (Real/Fake)** | ~32 GB | 611,829 `.flac` files | [`data/raw_real/asvspoof_2021_df/`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/data/raw_real/asvspoof_2021_df) <br> [`data/raw_fake/asvspoof_2021_df/`](file:///c:/Users/rajas/.gemini/antigravity-ide/scratch/fraudradar_ai/data/raw_fake/asvspoof_2021_df) | Evaluation subset for the ASVspoof 2021 Deepfake track, representing real-world compression, codec, and transmission distortions. |
 
 ---
 

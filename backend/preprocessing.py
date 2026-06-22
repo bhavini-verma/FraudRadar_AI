@@ -1,7 +1,7 @@
 """
-VoiceGuard — Preprocessing Pipeline
+fraudradar_ai — Preprocessing Pipeline
 ─────────────────────────────────────────────────────────────────────────
-Implements the preprocessing steps specified in the VoiceGuard project plan:
+Implements the preprocessing steps specified in the fraudradar_ai project plan:
 
   1. Load audio (any supported format) via librosa
   2. Convert to mono

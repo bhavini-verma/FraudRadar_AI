@@ -1,5 +1,5 @@
 """
-VoiceGuard — Hindi Fake Generator Diversification
+fraudradar_ai — Hindi Fake Generator Diversification
 ==================================================
 Downloads additional Hindi fake audio from multiple synthesis architectures
 to prevent the model from overfitting to FreeVC artifacts.
@@ -254,7 +254,7 @@ def generate_gtts_hindi(target_count=100):
 
 def main():
     print("=" * 70)
-    print("VoiceGuard — Hindi Fake Generator Diversification")
+    print("fraudradar_ai — Hindi Fake Generator Diversification")
     print("=" * 70)
     sys.stdout.flush()
 

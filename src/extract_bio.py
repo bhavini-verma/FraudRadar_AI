@@ -1,9 +1,9 @@
 """
-VoiceGuard — Biological + Replay-Attack Feature Engine (Inference)
+fraudradar_ai — Biological + Replay-Attack Feature Engine (Inference)
 ─────────────────────────────────────────────────────────────────────────
 Adapted from the user's training-time extract_bio.py for per-chunk inference.
 
-Per the VoiceGuard project plan, Stream B (XGBoost B) consumes a ~101-number (plan's "~102" is approximate; 101 is the literal itemized sum)
+Per the fraudradar_ai project plan, Stream B (XGBoost B) consumes a ~101-number (plan's "~102" is approximate; 101 is the literal itemized sum)
 feature vector per 3-second chunk:
 
     MFCC mean/std (40 coef x 2)                 = 80
@@ -25,7 +25,7 @@ feature vector per 3-second chunk:
     the literal sum of every feature it itemizes is 101. This module
     follows the itemized list exactly rather than padding with an
     invented feature to force a round 102 — if your trained
-    voiceguard_b.json expects a different count, update FEATURE_ORDER
+    fraudradar_ai.json expects a different count, update FEATURE_ORDER
     below to match its actual training-time column order exactly.)
 
 IMPORTANT: This module expects audio that has ALREADY been through
@@ -45,7 +45,7 @@ import librosa
 HOP_LENGTH = 512
 
 # Canonical, ordered feature names — this order MUST match the order used
-# when voiceguard_b.json (XGBoost B) was trained. If training used a
+# when fraudradar_ai.json (XGBoost B) was trained. If training used a
 # different column order, update FEATURE_ORDER to match exactly.
 FEATURE_ORDER = (
     [f"MFCC_{i+1}_Mean" for i in range(40)] +
@@ -132,7 +132,7 @@ def extract_bio_features_chunk(y: np.ndarray, sr: int = 16000) -> dict:
     already-preprocessed (16kHz mono, codec-simulated) audio chunk.
 
     Returns a dict keyed by FEATURE_ORDER names. Use vectorize() to turn
-    this into the ordered np.ndarray that voiceguard_b.json expects.
+    this into the ordered np.ndarray that fraudradar_ai.json expects.
     """
     if len(y) == 0 or np.max(np.abs(y)) < 1e-4:
         # Silent chunk — return zeroed features rather than raising, so the
@@ -206,7 +206,7 @@ def extract_bio_features_chunk(y: np.ndarray, sr: int = 16000) -> dict:
 
 def vectorize(features: dict) -> np.ndarray:
     """Convert a feature dict into the ordered 101-dim np.ndarray that
-    voiceguard_b.json expects. Raises if any expected feature is missing —
+    fraudradar_ai.json expects. Raises if any expected feature is missing —
     fail loudly rather than silently feeding the model a misaligned vector.
     """
     missing = [name for name in FEATURE_ORDER if name not in features]

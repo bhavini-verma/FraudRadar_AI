@@ -22,6 +22,6 @@ for line in open(log_file, 'r', encoding='utf-8'):
         continue
 
 for m in matches:
-    if "VoiceGuard — Audio Forensics Walkthrough" in m:
+    if "FraudRadar_AI — Audio Forensics Walkthrough" in m:
         with open('walkthrough_target.md', 'w', encoding='utf-8') as f:
             f.write(m)

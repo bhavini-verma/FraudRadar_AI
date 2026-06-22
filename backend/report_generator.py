@@ -1,5 +1,5 @@
 """
-VoiceGuard — PDF Forensic Investigation Report Generator
+fraudradar_ai — PDF Forensic Investigation Report Generator
 ─────────────────────────────────────────────────────────────────────────
 Implements PDF compilation using ReportLab for banking security SOC reviews.
 Follows the structural and compliance layout requirements from the UI.
@@ -46,7 +46,7 @@ class NumberedCanvas(canvas.Canvas):
         # Draw top header on all pages
         self.setFont("Helvetica-Bold", 7.5)
         self.setFillColor(slate_gray)
-        self.drawString(36, 756, "VOICEGUARD™ FORENSIC INVESTIGATION REPORT")
+        self.drawString(36, 756, "fraudradar_ai" FORENSIC INVESTIGATION REPORT")
         self.drawRightString(576, 756, "RESTRICTED — BANKING FRAUD INTELLIGENCE")
         
         # Header thin rule
@@ -158,7 +158,7 @@ def generate_investigation_report(data: dict, output_path: str):
 
     # 1. Header Title & Subtitle
     story.append(Spacer(1, 10))
-    story.append(Paragraph("VOICEGUARD™ FORENSIC INVESTIGATION REPORT", title_style))
+    story.append(Paragraph("fraudradar_ai FORENSIC INVESTIGATION REPORT", title_style))
     story.append(Paragraph("Automated Biometric Voice Authenticity & Deep-Fake Analysis • Bank-Level SOC Audit Trail", subtitle_style))
     
     # 2. Executive Verdict Panel (Callout box with thick left border)
